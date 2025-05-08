@@ -29,4 +29,4 @@ setTimeout 會是在宏任務列隊,
 因此這邊會先執行 Promise ，
 然後才是setTimeout。
 
-![event loop示意圖](https://github.com/Vic428-human/expense-tracker-app/blob/4ca4fced063cf7bb796e490f67724a596b5a43a6/assets/ReadmeImage/usersFirebase.jpg).
+![event loop示意圖]([https://github.com/Vic428-human/expense-tracker-app/blob/4ca4fced063cf7bb796e490f67724a596b5a43a6/assets/ReadmeImage/usersFirebase.jpg]).
