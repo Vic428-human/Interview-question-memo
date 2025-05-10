@@ -1,4 +1,4 @@
-這是關於useEffect中的一種訂閱用途
+I'm這是關於useEffect中的一種訂閱用途
 https://blog.csdn.net/nibabaoo/article/details/137011047
 
 一、什麼是 IntersectionObserver？  
@@ -19,6 +19,8 @@ https://blog.csdn.net/xiaohua0708day/article/details/144199076
 在 new IntersectionObserver 中，使用 onIntersectRef.current 替代 onIntersect，如此就不需依賴 onIntersect
 
 新增一個 useEffect 確保 onIntersect 改變時，要更新 onIntersectRef.current 內容
+
+https://www.programfarmer.com/zh-TW/articles/2025/react-understand-useEffect-fetching-and-subscription
 
 ```
 const useIntersectionObserver = ({ 
