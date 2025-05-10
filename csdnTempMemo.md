@@ -1,20 +1,24 @@
-
-初步認識 IntersectionObserver() 
-
 這是關於useEffect中的一種訂閱用途
 https://blog.csdn.net/nibabaoo/article/details/137011047
 
-一、什么是 IntersectionObserver？
-IntersectionObserver 是一个原生的 JavaScript API，用于异步地观察目标元素与其祖先元素（或视口）交叉的情况。
+一、什麼是 IntersectionObserver？  
+IntersectionObserver 是一個原生的 JavaScript API，用於非同步地觀察目標元素與其祖先元素（或視口）交叉的情況。  
 
-简单来说：
-
-它可以检测一个元素是否进入或离开视口。
-它是懒加载图片、滚动触发动画等功能的理想选择。
+它可以檢測一個元素是否進入或離開視口。  
+它是懶加載圖片、滾動觸發動畫等功能的理想選擇。
 https://blog.csdn.net/xiaohua0708day/article/details/144199076
 
-
 下面這個做法避免了：
+
+避免 onIntersect 的 reference 改變就造成 useEffect 重新執行。
+
+但當 onIntersect 改變時，依然要更新 useEffect 中的 onIntersect 資料
+
+利用 useRef 創建 onIntersectRef 儲存 onIntersect
+
+在 new IntersectionObserver 中，使用 onIntersectRef.current 替代 onIntersect，如此就不需依賴 onIntersect
+
+新增一個 useEffect 確保 onIntersect 改變時，要更新 onIntersectRef.current 內容
 
 ```
 const useIntersectionObserver = ({ 
