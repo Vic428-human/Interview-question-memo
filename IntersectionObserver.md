@@ -1,4 +1,4 @@
-I'm這是關於useEffect中的一種訂閱用途
+這是關於useEffect中的一種訂閱用途
 https://blog.csdn.net/nibabaoo/article/details/137011047
 
 一、什麼是 IntersectionObserver？  
@@ -70,3 +70,14 @@ const useIntersectionObserver = ({
 };
 ```
 
+threshold用途，從options觀察
+
+https://blog.csdn.net/zhudapeng929/article/details/141924340?utm_medium=distribute.wap_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-141924340-blog-144199076.237^v3^wap_relevant_t0_download&spm=1001.2101.3001.4242.1
+
+```
+let options = {
+  root: null, // 观察元素的根元素，null表示视窗
+  rootMargin: '0px', // 根元素的边界
+  threshold: 0.5 // 交叉比例的阈值，0.5表示元素一半进入视窗时触发回调
+};
+```
