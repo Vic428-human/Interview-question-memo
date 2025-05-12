@@ -70,6 +70,32 @@ const useIntersectionObserver = ({
 };
 ```
 
+在某個jsx中調用 IntersectionObserver 這個客製化的hook，會發現options,在此hook中有一個預設值，如果要客製化，也可以給定一個新的props去覆蓋default值，下面會有針對options 中的屬性用途做說明。
+
+
+```
+// 使用情境
+function ScrollTracker() {
+  const [count, setCount] = useState(0);
+
+  // useIntersectionObserver 每次 render 都會重新執行
+  const { targetRef } = useIntersectionObserver({
+    // 此函式每次 render 都會重新創建，但內容並沒改變
+    onIntersect: (isIntersecting) => {
+      if (isIntersecting) {
+        setCount(c => c + 1);
+      }
+    }
+  });
+
+  return <div ref={targetRef}>{count} times visible</div>;
+}
+
+```
+
+
+
+
 threshold用途，從options觀察
 
 https://blog.csdn.net/zhudapeng929/article/details/141924340?utm_medium=distribute.wap_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-141924340-blog-144199076.237^v3^wap_relevant_t0_download&spm=1001.2101.3001.4242.1
