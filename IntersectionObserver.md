@@ -60,8 +60,8 @@ const useIntersectionObserver = ({
     observer.observe(target);
 
     return () => {
-      observer.unobserve(target);
-      observer.disconnect();
+      observer.unobserve(target);//停止观察元素（可选） 
+      observer.disconnect();//停止观察所有元素并清除所有观察者（可选）
     };
   }, [rootMargin, threshold]); 
   // ✅ onIntersect 不再是依賴，不再導致不必要的重新訂閱
