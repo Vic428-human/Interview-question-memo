@@ -1,4 +1,56 @@
 
+
+
+## 用class 來製作觀察訂閱跟取消訂閱的功能
+
+```
+class Observable {
+  constructor() {
+    this.observers = [];
+  }
+
+  subscribe(func) {
+    this.observers.push(func);
+  }
+
+  unsubscribe(func) {
+    this.observers = this.observers.filter((observer) => observer !== func);
+  }
+
+  notify(data) {
+    this.observers.forEach((observer) => observer(data));
+  }
+}
+
+// 建立 Observable 實例
+const observable = new Observable();
+
+// 定義兩個觀察者
+function observer1(data) {
+  console.log('Observer 1 received:', data);
+}
+
+function observer2(data) {
+  console.log('Observer 2 received:', data);
+}
+
+// 觀察者訂閱
+observable.subscribe(observer1);
+observable.subscribe(observer2);
+
+// 用假數據通知觀察者
+observable.notify('Mock data 1');
+observable.notify('Mock data 2');
+
+// 取消 observer1 訂閱
+observable.unsubscribe(observer1);
+
+// 再次通知，只剩 observer2 會收到
+observable.notify('Mock data 3');
+
+```
+
+
 ![observer pattern 示意圖](https://github.com/Vic428-human/Interview-question-memo/blob/4616c1eb67f8d9aef2294d44f6becda2c905b79b/JavaScript/Screenshot_2025-05-17-16-11-12-051_com.google.android.youtube-edit.jpg).
 
 
