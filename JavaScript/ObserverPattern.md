@@ -22,7 +22,8 @@ observerMixin.addObserver(() => {
 })
 
 ```
-先了解 set 怎麼使用
+
+### 先了解 set 怎麼使用
 
 ```
 const set = new Set();
@@ -35,4 +36,17 @@ set.add({ name: 'Tom' });
 console.log(set); 
 // 輸出：Set(3) { 1, 2, 'apple', { name: 'Tom' } }
 ```
+
+現在嘗試基於剛才的observerMixin物件，去使用
+如果把這個 Set 的內容（例如：Set(4) { 1, 2, 'apple', { name: 'Tom' } }）當作 observers，然後執行：
+
+### 這時會發生什麼？
+
+notify() 會嘗試對 Set 裡的每一個元素呼叫 obs()。
+
+但只有「函數」型別的元素可以被呼叫（即 obs 必須是 function）。
+
+如果 Set 裡面有數字、字串或物件（像 1, 2, 'apple', { name: 'Tom' }），這些都不是函數，執行 obs() 會直接拋出 TypeError 錯誤。
+
+所以，set()的內容需要是物件裡有function才行
 
