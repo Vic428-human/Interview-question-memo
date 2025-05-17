@@ -50,3 +50,12 @@ notify() 會嘗試對 Set 裡的每一個元素呼叫 obs()。
 
 所以，set()的內容需要是物件裡有function才行
 
+例如添加的時候加一個 arrow function 
+```
+const observers = new Set([
+  () => { console.log('observer 1'); },
+  () => { console.log('observer 2'); },
+  () => { console.log('observer 3'); }
+]);
+```
+
