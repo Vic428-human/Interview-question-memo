@@ -1,7 +1,11 @@
 
 
 
-## 用class 來製作觀察訂閱跟取消訂閱的功能
+### 規劃class 層級的observer pattern 
+
+## 應用場景
+
+假設現在有多個按鈕，可能是Switch toggle，也可能是一般的按鈕，不管哪一種，我都希望點擊後，能夠出現一個toast彈窗，等於說這兩個handleClick都會觸發notify這個共通function，可以想像成這是一個觀察者，觀察著這兩種按鈕的調用，而同時我希望按鈕被調用的時候，能同時觀察log的紀錄，所以另外獨立出來logger，這麼做可以簡化function的重複出現
 
 ```
 class Observable {
@@ -47,6 +51,52 @@ observable.unsubscribe(observer1);
 
 // 再次通知，只剩 observer2 會收到
 observable.notify('Mock data 3');
+
+```
+
+```
+import React from "react";
+import { Button, Switch, FormControlLabel } from "@material-ui/core";
+import { ToastContainer, toast } from "react-toastify";
+import observable from "./Observable";
+
+function handleClick() {
+  observable.notify("User clicked button!");
+}
+
+function handleToggle() {
+  observable.notify("User toggled switch!");
+}
+
+function logger(data) {
+  console.log(`${Date.now()} ${data}`);
+}
+
+function toastify(data) {
+  toast(data, {
+    position: toast.POSITION.BOTTOM_RIGHT,
+    closeButton: false,
+    autoClose: 2000
+  });
+}
+
+observable.subscribe(logger);
+observable.subscribe(toastify);
+
+export default function App() {
+  return (
+    <div className="App">
+      <Button variant="contained" onClick={handleClick}>
+        Click me!
+      </Button>
+      <FormControlLabel
+        control={<Switch name="" onChange={handleToggle} />}
+        label="Toggle me!"
+      />
+      <ToastContainer />
+    </div>
+  );
+}
 
 ```
 
