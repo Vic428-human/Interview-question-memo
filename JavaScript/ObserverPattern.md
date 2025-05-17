@@ -22,3 +22,17 @@ observerMixin.addObserver(() => {
 })
 
 ```
+先了解 set 怎麼使用
+
+```
+const set = new Set();
+set.add(1);
+set.add(2);
+set.add(2); // 重複的值會被忽略
+set.add('apple');
+set.add({ name: 'Tom' });
+
+console.log(set); 
+// 輸出：Set(3) { 1, 2, 'apple', { name: 'Tom' } }
+```
+
