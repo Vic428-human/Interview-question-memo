@@ -15,6 +15,10 @@ function TodoList({ todos, tab, theme }) {
 ```
 
 使用 useMemo(calculateValue, dependencies)
+
+初次渲染時，從 `useMemo` 獲取的值會是 `calculation` 函式的執行結果。  
+
+在之後的每一次渲染中，React 會比較前後兩次渲染的**所有依賴項**是否相同。如果透過 `Object.is` 比對後，所有依賴項都沒有變化，那麼 `useMemo` 會返回之前已經計算過的值。否則，React 會重新執行 `calculation` 函式並返回一個新的值。  
 ```
 function TodoList({ todos, tab }) {
   const visibleTodos = useMemo(
