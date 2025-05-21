@@ -1,0 +1,65 @@
+
+1. Promise 是一個建構函式，可以用來建立新的 Promise 物件。
+2. Promise 本身有靜態方法（如 all、race、resolve、reject 等），可直接透過 Promise 調用。
+3. Promise 的 prototype 上有 then、catch 等方法，這些是每個 Promise 實例都能使用的方法。
+
+### 此promise構造函數，會顯示什麼結果？
+
+因為經歷reject ，所以不會觸發到then，而是直接執行catch，
+又因catch 有成功執行，所以接下來的then也跟著觸發，
+所以log的結果是，Error 1跟 Success 4。
+```
+function job() {
+  return new Promise(function(resolve, reject) {
+    reject();
+  });
+}
+
+let promise = job();
+
+promise
+  .then(function () {
+    console.log("Success 1");
+  })
+  .then(function () {
+    console.log("Success 2");
+  })
+  .then(function () {
+    console.log("Success 3");
+  })
+  .catch(function () {
+    console.log("Error 1");
+  })
+  .then(function () {
+    console.log("Success 4");
+  });
+```
+
+### promise構造函數在異步的範例
+執行這段程式碼，會在 2 秒後輸出「執行完成」。
+我只是 new 了一個物件，並沒有呼叫它，
+但傳進去的函式就已經執行了，這是一個需要注意的細節。
+
+```
+//做一些非同步操作
+setTimeout(function(){
+    console.log('執行完成');
+    resolve('隨便什麼資料');
+}, 2000);
+```
+所以我們用 Promise 的時候，通常會把它包在一個函式中，
+在需要的時候才去執行這個函式。
+
+```
+function runAsync(){
+    var p = new Promise(function(resolve, reject){
+        //做一些异步操作
+        setTimeout(function(){
+            console.log('执完成');
+            resolve('随便');
+        }, 2000);
+    });
+    return p;            
+}
+runAsync()
+```
