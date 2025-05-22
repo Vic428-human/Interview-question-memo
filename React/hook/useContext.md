@@ -71,9 +71,10 @@ function ExampleComponent() {
 ```
 
 ### 父子組件調用 tanstack query 時的範本
-
+說明：
+1. react query 有 global cache
 PostCard.tsx
-
+2.每個組件都是獨立的，不會像createContext一樣，因為父組件觸發而導致子組件們都跟著render，react query特別好處在於只有當postId更新了才執行對應的子組件，有效的節省效能。
 ```
 import { usePostQuery } from '../usePostQuery';
 
