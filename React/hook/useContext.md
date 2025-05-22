@@ -10,7 +10,7 @@ useContext 是 React 的一個 Hook。
 
 
 
-examplecontext.tsx
+ExampleContext.tsx
 
 ```
 import { createContext, useContext, useState } from 'react';
@@ -156,4 +156,30 @@ export function usePostQuery(postId: number) {
   });
 }
 
+```
+### 使用 useSuspenseQuery 的做法
+```
+import { postQueryOptions } from "./usePostQuery";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+
+type PostCardProps = {
+    postId: number;
+};
+
+export function PostCard({ postId }: PostCardProps) {
+    const postQuery = useSuspenseQuery(postQueryOptions(postId));
+
+    if (postQuery.isLoading) {
+        return <div>...loading...</div>;
+    }
+
+    if (postQuery.isError) {
+        return <div>error: {postQuery.error.message}</div>;
+    }
+
+    return (
+        <PostCardHeader postId={postId} />
+        <PostCardBody post={postQuery.data} />
+    );
+}
 ```
