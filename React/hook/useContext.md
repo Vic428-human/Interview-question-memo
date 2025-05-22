@@ -70,6 +70,20 @@ function ExampleComponent() {
 
 ```
 
+## 不能過分依賴createContext，可以搭配tanstack query去做使用React 的 createContext（通常搭配 useContext 使用）雖然方便，但在實際開發中有以下幾個明顯缺點：
+
+性能問題：Context 的設計並不適合高頻率、大量更新的場景。每當 Context value 改變時，所有使用該 Context 的組件都會重新渲染，這在大型應用或高頻狀態變動時會造成性能瓶頸。
+
+資料分散與追蹤困難：Context 只能存儲單一值，當應用狀態複雜時，往往需要建立多個 Context，導致資料來源分散、相依順序混亂，維護成本高。
+
+缺乏模組化與邏輯分層：Context 本質上只是「資料容器」，沒有內建的狀態更新邏輯結構（如 action/reducer），也缺乏分層、模組化的架構輔助，邏輯容易雜亂無章。
+
+不易整合非同步邏輯：Context 沒有預設處理 API 請求等非同步操作的機制，開發者需自行封裝與維護相關邏輯。
+
+缺乏 DevTools 支援：Context 沒有內建的開發工具來追蹤狀態變化，除錯困難，無法像 Redux 那樣方便地檢查狀態歷程
+
+備註：理解上述局限性之後，參考下方做法
+
 ### 父子組件調用 tanstack query 時的範本
 說明：
 1. react query 有 global cache
