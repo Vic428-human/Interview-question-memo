@@ -4,6 +4,8 @@ useContext 是 React 的一個 Hook。
 
 適合小型到中型應用的全域狀態管理，但大型專案建議使用更完整的狀態管理方案（如 Redux
 
+examplecontezt.tsx
+
 ```
 import { createContext, useContext, useState } from 'react';
 
@@ -36,5 +38,28 @@ export const useExampleContext = () => {
   }
   return context;
 };
+
+```
+
+### 如何調用？
+
+App.tsx
+
+```
+import { ExampleProvider, useExampleContext } from './ExampleContext';
+
+export default function App() {
+  return (
+    <ExampleProvider>
+      <ExampleComponent />
+    </ExampleProvider>
+  );
+}
+
+function ExampleComponent() {
+  const { valueA }: { valueA: string } = useExampleContext();
+
+  return <div>{valueA}</div>;
+}
 
 ```
