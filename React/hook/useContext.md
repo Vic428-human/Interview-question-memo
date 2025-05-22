@@ -70,7 +70,7 @@ function ExampleComponent() {
 
 ```
 
-### 與 tanstack query 搭配使用時
+### 父子組件調用 tanstack query 時的範本
 
 PostCard.tsx
 
@@ -117,4 +117,23 @@ function PostCardBody({ postId }: PostCardBodyProps) {
 
   return <div>{postQuery.data?.body}</div>;
 }
+```
+
+### tanstack query 內部的樣子
+usePostquery.ts
+```
+
+import { useQuery } from '@tanstack/react-query';
+
+export function usePostQuery(postId: number) {
+  return useQuery({
+    queryKey: ['post', postId],
+    queryFn: async () => ({
+      id: postId,
+      title: 'Hello World',
+      body: 'This is a test post.',
+    }),
+  });
+}
+
 ```
