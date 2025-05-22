@@ -69,3 +69,36 @@ function ExampleComponent() {
 }
 
 ```
+
+### 與 tanstack query 搭配使用時
+
+PostCard.tsx
+
+``|
+import { usePostQuery } from '../usePostQuery';
+
+type PostCardProps = {
+  postId: number;
+};
+
+export function PostCard({ postId }: PostCardProps) {
+
+// usePostQuery來自於 tanstack query 獲取API回傳的數據
+  const postQuery = usePostQuery(postId);
+
+  if (postQuery.isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (postQuery.isError) {
+    return <div>Error: {postQuery.error.message}</div>;
+  }
+
+  return (
+    <>
+      <PostCardHeader postId={postId} />
+      <PostCardBody post={postQuery.data} />
+    </>
+  );
+}
+```
