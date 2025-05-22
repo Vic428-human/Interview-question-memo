@@ -6,7 +6,9 @@ useContext 是 React 的一個 Hook。
 
 ### 備註
 1. 不要把contextAPI當成global statemangement
-2. 適合用在themeProvider，改變不太頻繁的，authProvider也適合使用。
+2. 適合用在themeProvider，改變不太頻繁的，authProvider也適合使用。之前我在side project有實際應用過 [AuthProvider](https://github.com/Vic428-human/expense-tracker-app/blob/main/context/authContext.tsx)
+
+
 
 examplecontext.tsx
 
