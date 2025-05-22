@@ -101,4 +101,20 @@ export function PostCard({ postId }: PostCardProps) {
     </>
   );
 }
+
+type PostCardHeaderProps = Pick<PostCardProps, 'postId'>;
+
+function PostCardHeader({ postId }: PostCardHeaderProps) {
+  const postQuery = usePostQuery(postId);
+
+  return <h1>{postQuery.data?.title}</h1>;
+}
+
+type PostCardBodyProps = Pick<PostCardProps, 'postId'>;
+
+function PostCardBody({ postId }: PostCardBodyProps) {
+  const postQuery = usePostQuery(postId);
+
+  return <div>{postQuery.data?.body}</div>;
+}
 ```
