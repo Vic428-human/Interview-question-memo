@@ -74,7 +74,7 @@ function ExampleComponent() {
 
 PostCard.tsx
 
-``|
+```
 import { usePostQuery } from '../usePostQuery';
 
 type PostCardProps = {
