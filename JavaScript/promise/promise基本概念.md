@@ -63,3 +63,48 @@ function runAsync(){
 }
 runAsync()
 ```
+
+### envent loop當運用到 microtask queue 與 promise 同步時
+
+執行順序分析
+
+同步代碼先執行
+
+console.log("start") 直接輸出 start。
+
+宣告 fn 函式（這步不會有輸出）。
+
+console.log("middle") 輸出 middle。
+
+呼叫 fn()，執行 Promise executor（同步）
+
+執行 fn() 時，會立即執行 Promise 的 executor function，所以 console.log(1) 會馬上輸出 1。
+
+resolve("success") 會將 Promise 狀態設為 fulfilled，但 .then 的回呼（callback）不會立刻執行，而是被加入「microtask queue」。
+
+繼續執行同步代碼
+
+console.log("end") 輸出 end。
+
+主線程（call stack）清空後，執行 microtask queue（Promise 的 then）
+
+這時，Event Loop 會檢查 microtask queue，發現有一個 .then 的回呼，所以執行 console.log(res)，輸出 success。
+
+```
+console.log("start");
+
+const fn = () => 
+  new Promise((resolve, reject) => {
+    console.log(1);
+    resolve("success");
+  });
+
+console.log("middle");
+
+fn().then((res) => {
+  console.log(res);
+});
+
+console.log("end");
+
+```
