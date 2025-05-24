@@ -38,6 +38,14 @@ REBASE 的主要優點是它可以產生更乾淨、更線性的 commit 歷史�
 
 - 影響協作（Collaboration Issues）
 如果有其他協作者基於 main 或 feat 分支進行開發，這種多次 REBASE 並 merge 的操作會讓大家的 commit 歷史產生分歧，可能導致更多協作上的混亂
+
+#### 所以多人協作時，如何避免REBASE產生的問題
+
+若 feature 分支已經合併到 main，
+後續新功能請從 main 開新分支，
+而不是在舊分支上繼續 rebase，
+這樣能避免歷史污染和重複 commit。
+
 ```
 git merged master
 ```
