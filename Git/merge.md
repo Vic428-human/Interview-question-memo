@@ -23,19 +23,20 @@ REBASE 的主要優點是它可以產生更乾淨、更線性的 commit 歷史�
 #### REBASE 實際應用上會產生的問題 
 問題描述：
 這邊要記得，假如你當前的 feat 分支已經經裡過REBASE，且mergec main branch，首先，你的 feat 已經壓縮後的commit，
-不是原先那個commit，然後因為一些原因，這個REBASE過後的 feat 又加了一些新的功能，此時你又再做了一次REBASE，等於
+不是原先那個commit，因為hash產生改變，即使內容一樣。
+然後因為一些原因，這個REBASE過後的 feat 又加了一些新的功能，也可能是改bug，此時你又對feat做了一次REBASE，等於
 這個feat經歷過兩次REBASE，如果此時把經歷第二次的 feat merge main ，對於main來說可能會發生那些問題？
 
-重複的 Commit（Duplicate Commits）
+- 重複的 Commit（Duplicate Commits）
 如果你在第一次 REBASE 後已經將 feat merge 到 main，main 上已經有這些 commit 的內容。第二次 REBASE 會產生新的 commit（即使內容一樣，commit hash 會不同），這時再 merge 回 main，可能會造成 main branch 上出現重複內容的 commit，導致 commit 歷史混亂。
 
-產生衝突（Conflicts）
+- 產生衝突（Conflicts）
 因為同樣的內容以不同 commit hash 兩次進入 main，Git 可能會偵測到衝突，需要手動解決，這會增加維護成本。
 
-歷史紀錄不一致（History Divergence）
+- 歷史紀錄不一致（History Divergence）
 由於 REBASE 會重寫 commit 歷史，main branch 上的 commit 可能和 feat 分支的 commit 內容相同但 hash 不同，這會讓追蹤歷史變得困難，降低可讀性與可維護性。
 
-影響協作（Collaboration Issues）
+- 影響協作（Collaboration Issues）
 如果有其他協作者基於 main 或 feat 分支進行開發，這種多次 REBASE 並 merge 的操作會讓大家的 commit 歷史產生分歧，可能導致更多協作上的混亂
 ```
 git merged master
