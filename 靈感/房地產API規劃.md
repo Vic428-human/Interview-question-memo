@@ -22,6 +22,7 @@ connection.connect(function(err) {
 // Import the data from the csv with these columns: Date,RegionName,AreaCode,AveragePrice,Index
 const data = fs.readFileSync('UK-HPI.csv', 'utf8');
 const rows = data.split('\n');
+// 插入的欄位就是，欄位名稱只是參考，要依據實際csv檔案狀況去更改
 const columns = ['Date', 'RegionName', 'AreaCode', 'AveragePrice', 'Index'];
 
 // Create the columns string
@@ -41,7 +42,9 @@ const values = rows.slice(1).map(row => {
   return columnsInRow;
 }).filter(Boolean);
 
-// The rest of your code...
+// 將資料匯入到一個名為 house_prices 的資料表
+// 等價 INSERT INTO house_prices (Date, //RegionName, AreaCode, AveragePrice, // Index) VALUES (?, ?, ?, ?, ?)
+
 const query = `INSERT INTO house_prices (${columns.join(',')}) VALUES ?`;
 
 // Batch insert the data in batches of 1000
