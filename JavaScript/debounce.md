@@ -36,6 +36,10 @@ function debounce(func, delay) {
 
 ## 觸發多次按鈕點擊的時候
 
+### 功能效果：
+- **直接點擊按鈕時**，`pressCount` 每次立即更新。
+- **debounce 機制** 使得 `triggerCount` 只會在 **點擊間隔超過 800 毫秒後才更新**，可以避免頻繁執行操作，適用於防止 **過度請求 API** 或 **限制用戶行為**。
+
 ```
 <!DOCTYPE html>
 <html lang="zh">
