@@ -36,6 +36,54 @@ function debounce(func, delay) {
 
 ## 觸發多次按鈕點擊的時候
 
+```
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debounce 示例</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+    <style>
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="incrementBtn">點擊我</button>
+        <p>按鈕點擊次數: <span id="pressCount">0</span></p>
+        <p>觸發次數: <span id="triggerCount">0</span></p>
+    </div>
+
+    <script>
+        const btn = document.getElementById("incrementBtn");
+        const pressCountDisplay = document.getElementById("pressCount");
+        const triggerCountDisplay = document.getElementById("triggerCount");
+
+        let pressedCount = 0;
+        let triggerCount = 0;
+
+        const debouncedCount = _.debounce(() => {
+            triggerCountDisplay.textContent = ++triggerCount;
+        }, 800);
+
+        btn.addEventListener("click", () => {
+            pressCountDisplay.textContent = ++pressedCount;
+            debouncedCount();
+        });
+    </script>
+</body>
+</html>
+```
+
 ### lodash中的debounce基本用法
 ```
 import debounce from 'lodash/debounce'
