@@ -4,6 +4,7 @@
    當連續觸發的事件（如輸入框打字、窗口縮放、滾動等）過於頻繁時，防抖會將多次觸發合併為**最後一次有效執行**，避免重複計算或請求。例如：
    - 搜索框輸入時，只在用戶停止打字後才發送請求。
    - 滾動視窗的時候
+   - 觸發多次按鈕點擊的時候
    - 窗口縮放（resize）後，僅在調整結束時計算最終布局。
 
 2. **優化性能與資源消耗**  
@@ -32,3 +33,18 @@ function debounce(func, delay) {
 
 ## 滾動視窗的時候
 如果每一次滾動，都觸發請求新的文章內容，會太多次請求，這時候可以設定，當滾輪觸及畫面底部網上幾px距離的範圍內時，才call API，架設螢幕高度是800px，然後我要求觸及到底部往上500px範圍內才發送API請求，意謂者，當滾輪在由上往下300px內，是不會觸發到請求的，這能大幅減少請求頻率。
+
+## 觸發多次按鈕點擊的時候
+
+### lodash中的debounce基本用法
+```
+import debounce from 'lodash/debounce'
+
+// 創建一個防抖函數，500ms 內多次觸發只會執行最後一次
+const debouncedFn = debounce(function() {
+  console.log('Debounced function executed')
+}, 500)
+
+// 綁定到事件，例如輸入框輸入
+inputElement.addEventListener('input', debouncedFn)
+```
