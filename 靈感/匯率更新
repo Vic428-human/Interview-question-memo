@@ -1,0 +1,87 @@
+
+## 🧩 父元件：使用 useLiveRates() 搭配 CurrencyItem
+
+### 如果 Portfolio 是某個父層（甚至祖父層）的子組件，當它自己更新時，父層會不會跟著 re-render？
+
+🎯 簡單結論：
+不會！只要父層本身沒有 state/props 改變，就不會 re-render。
+
+```
+import React from 'react';
+import { useLiveRates } from './useLiveRates';
+import CurrencyItem from './CurrencyItem';
+
+const Portfolio = () => {
+  const rates = useLiveRates();
+
+  // 假設這是使用者的資產
+  const holdings = [
+    { symbol: 'BTC', amount: 0.5 },
+    { symbol: 'ETH', amount: 2.3 },
+    { symbol: 'SOL', amount: 100 },
+  ];
+
+  return (
+    <div>
+      {holdings.map(asset => (
+        <CurrencyItem
+          key={asset.symbol}
+          symbol={asset.symbol}
+          amount={asset.amount}
+          rate={rates[asset.symbol] ?? 0} // 沒資料時給 0
+        />
+      ))}
+    </div>
+  );
+};
+```
+
+## 🧱 CurrencyItem 維持不變，用 React.memo 提升效能
+
+```
+
+import React, { useMemo } from 'react';
+
+const CurrencyItem = React.memo(({ symbol, amount, rate }) => {
+  const displayValue = useMemo(() => amount * rate, [amount, rate]);
+  return (
+    <div>
+      {symbol}: {amount} ≈ ${displayValue.toFixed(2)}
+    </div>
+  );
+});
+
+```
+## 「我們要更新 rates 的值，但只在資料真的有變化的時候才更新。」
+```
+import { useEffect, useState } from 'react';
+
+export function useLiveRates() {
+  const [rates, setRates] = useState({}); // { BTC: 62700.12, ETH: 3120.45, ... }
+
+  useEffect(() => {
+    const ws = new WebSocket('wss://your-feed.com/rates');
+
+    ws.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        // 範例: { BTC: 62700.12, ETH: 3120.45 }
+        setRates(prev => {
+          // 只在有實質變動時更新
+          const hasChanged = Object.keys(data).some(
+            key => data[key] !== prev[key]
+          );
+          return hasChanged ? data : prev;
+        });
+      } catch (e) {
+        console.error('Invalid WebSocket message:', e);
+      }
+    };
+
+    return () => ws.close();
+  }, []);
+
+  return rates;
+}
+
+```
