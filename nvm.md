@@ -1,6 +1,6 @@
 
 # 前言：
-> 從gitlab上透過ssh方式，將專案clone下來的事前準備。
+> 在mac環境使用nvm的事前準備。
 ---
 
 # Node Version Manager (NVM) 安裝與使用指南
