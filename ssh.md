@@ -8,7 +8,7 @@ SSH 配置指南
 在使用 GitLab 克隆项目之前，您需要设置 SSH 密钥。
 生成 SSH 密鑰
 您可以使用以下命令生成一个 Ed25519 类型的 SSH 密钥对：
-ssh-keygen -t ed25519 -C "jasper@brevitydata.net"
+ssh-keygen -t ed25519 -C "test@example.net"
 
  * 此命令将生成一个 Ed25519 类型的 SSH 密钥对，并带有 "test@example.net" 的标签（注释）。
  * 默认情况下，私钥将存储在 ~/.ssh/id_ed25519，公钥则存储在 ~/.ssh/id_ed25519.pub。
