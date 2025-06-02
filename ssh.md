@@ -10,9 +10,9 @@ SSH 配置指南
 您可以使用以下命令生成一个 Ed25519 类型的 SSH 密钥对：
 ssh-keygen -t ed25519 -C "jasper@brevitydata.net"
 
- * 此命令将生成一个 Ed25519 类型的 SSH 密钥对，并带有 "jasper@brevitydata.net" 的标签（注释）。
+ * 此命令将生成一个 Ed25519 类型的 SSH 密钥对，并带有 "test@example.net" 的标签（注释）。
  * 默认情况下，私钥将存储在 ~/.ssh/id_ed25519，公钥则存储在 ~/.ssh/id_ed25519.pub。
- * 潜在问题提示： -C "jasper@brevitydata.net" 仅是密鑰的标签，不会影响文件名称。请确保在提示时按 Enter 接受默认文件名称 (id_ed25519)，否则后续步骤可能会因文件名称不符而失败。
+ * 潜在问题提示： -C "test@example.net" 仅是密鑰的标签，不会影响文件名称。请确保在提示时按 Enter 接受默认文件名称 (id_ed25519)，否则后续步骤可能会因文件名称不符而失败。
 啟動 SSH 代理
 启动 SSH 代理是管理私钥的必要步骤。执行以下命令：
 eval $(ssh-agent -s)
