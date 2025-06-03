@@ -37,11 +37,11 @@ const OrderForm = () => {
   });
 
   const {
-    data: orderResult,
-    error: orderError,
-    mutate: submitOrder,
-    isLoading: isSubmitting,
-    reset: resetOrder
+    data: orderResult, // mutation 成功時的回傳資料。這裡重新命名為 orderResult 
+    error: orderError, // 如果 mutation 失敗，會包含錯誤物件。
+    mutate: submitOrder,// 執行 mutation 的函數。例如：mutate(formData)，把參數發送給下方的 placeOrder mutation 的函數。
+    isLoading: isSubmitting,  // 當 mutation 執行中為 true。
+    reset: resetOrder // 重置錯誤與資料狀態，通常用在重新發送前。
   } = useMutation({
     mutationFn: placeOrder,
     onSuccess: (data) => {
