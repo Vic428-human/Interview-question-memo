@@ -14,14 +14,13 @@
 
 - **`staleTime: 5000`** 表示數據在 5 秒後會被標記為「過時」（stale），但不會立即觸發重新獲取。若同時有其他觸發條件（如視窗焦點），則會重新獲取。
 
-- ```
+```
   import { useQuery } from 'react-query';
 
 const fetchData = async () => {
   const response = await fetch('https://api.example.com/data');
   return response.json();
 };
-```
 
 const MyComponent = () => {
 
