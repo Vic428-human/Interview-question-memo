@@ -14,6 +14,9 @@
 
 - **`staleTime: 5000`** 表示數據在 5 秒後會被標記為「過時」（stale），但不會立即觸發重新獲取。若同時有其他觸發條件（如視窗焦點），則會重新獲取。
 
+
+### 可以把拿到的 renameData 顯示在jsx上
+
 ```
   import { useQuery } from 'react-query';
 
@@ -49,6 +52,22 @@ const MyComponent = () => {
 					  </div>
 				  </div>;
 }; 
+```
+
+或者是把 renameData 作為 dependency 觸發 useEffect 也可以
+
+```
+useEffect(() => {
+      if (renameData) {
+         // do something else 
+      }
+    }, [renameData]);
+    
+    useEffect(() => {
+      if (renameError) {
+         // do something else 
+      }
+    }, [renameError]);
 ```
 在 TanStack Query (以前稱為 React Query) 的主題下，useQuery 和 useMutation 雖然都用於處理資料，但它們的主要使用情境區別在於：
  * useQuery：處理資料的讀取 (Fetching/Reading Data)
