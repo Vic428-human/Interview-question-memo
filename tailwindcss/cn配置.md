@@ -6,6 +6,14 @@
  * 高度可維護性： 這種模式將樣式邏輯封裝在一個簡潔的工具函數中，使得組件的 className 屬性更加清晰和易於理解。你可以在不修改組件本身的情況下，調整 cn 的行為（儘管通常不會這樣做）。
 這是一種在現代 React 應用中，特別是結合 Tailwind CSS 時，非常推薦且廣泛使用的模式，它極大地簡化了 CSS 類名的管理。
 
+```
+import type { ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+```
 
 這段代碼定義了 cn 函數，並解釋了它如何利用兩個流行的庫來實現其功能：
  * clsx： 這是用於條件性地合併類名的一個非常小巧且高效的庫。
