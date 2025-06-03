@@ -14,6 +14,43 @@
 
 - **`staleTime: 5000`** 表示數據在 5 秒後會被標記為「過時」（stale），但不會立即觸發重新獲取。若同時有其他觸發條件（如視窗焦點），則會重新獲取。
 
+- ```
+  import { useQuery } from 'react-query';
+
+const fetchData = async () => {
+  const response = await fetch('https://api.example.com/data');
+  return response.json();
+};
+
+
+const MyComponent = () => {
+
+  const { data: renameData, isLoading, error: renameError, refetch } = useQuery(
+	  'fetchData',  // === queryKey: ['fetchData'], 這是靜態key 。 除非寫成 ['fetchData', id]  那就會根據id的變化而查詢 
+		 fetchData ,  // ===  queryFn: fetchData, (實際獲取數據的函數)
+		 {
+		   enabled: false, // enabled: 控制查询是否自动运行。
+		   staleTime: 5000, // 数据在 5 秒内不会重新获取
+		   cacheTime: 10000, // 数据在 10 秒后从缓存中移除
+		   retry: 3, // 失败后重试 3 次
+		   refetchOnWindowFocus: true,
+		   retry: 2,
+		   onSuccess: (data) => console.log('Fetched:', data),
+		   onError: (err) => console.error('Error:', err),
+		   }
+		);
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+	
+  return <div>
+				    {JSON.stringify(renameData)}
+					  <div>
+						  <button onClick={() => refetch()}>Fetch Data</button>
+					  </div>
+				  </div>;
+}; 
+```
 在 TanStack Query (以前稱為 React Query) 的主題下，useQuery 和 useMutation 雖然都用於處理資料，但它們的主要使用情境區別在於：
  * useQuery：處理資料的讀取 (Fetching/Reading Data)
  * useMutation：處理資料的變更 (Creating, Updating, Deleting Data)
