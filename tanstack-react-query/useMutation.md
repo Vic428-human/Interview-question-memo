@@ -126,3 +126,21 @@ const OrderForm = () => {
   );
 };
 ```
+
+## 關鍵點說明
+
+1. **useMutation的使用**：
+   - `mutationFn`：指定API調用函數
+   - `onSuccess`/`onError`：處理成功/失敗回調
+   - `reset`：重置mutation狀態
+
+2. **狀態管理**：
+   - `isSubmitting`：防止重複提交
+   - `orderResult`：顯示成功結果
+   - `orderError`：顯示錯誤訊息
+
+3. **用戶體驗**：
+   - 加載狀態反饋
+   - 錯誤後提供重試選項
+   - 表單輸入的即時驗證
+
