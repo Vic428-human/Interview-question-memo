@@ -52,6 +52,9 @@ export const selectCustomStatsSlice = ({ customStatsReducer }) => customStatsRed
 ```
 這裡的 customStatsReducer 是你在 store.js 裡註冊進 Redux 的 reducer key 名稱，也就是這段：
 
+因為 customStatsReducer 是你給這個 reducer 起的名稱，所以在 select 時就會用同一個名稱來解構。
+
+
 ```
 import customStatsReducer from '../features/customStats/customStatsSlice';
 
