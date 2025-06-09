@@ -46,11 +46,9 @@ const { matchListStats } = useSelector(selectCustomStatsSlice);
 ### 定義 Selector Function
 ```
 //src/features/customStats/customStatsSlice.js
- 
-```
+
 export const selectCustomStatsSlice = ({ customStatsReducer }) => customStatsReducer;
 
-```
 ```
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchMatchStatsFromAPI } from '../../api/statsAPI';
