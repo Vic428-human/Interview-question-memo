@@ -64,10 +64,9 @@ const store = configureStore({
 });
 ```
 ---
+customStatsSlice.js 這個檔案
 
 ```
-// src/features/customStats/customStatsSlice.js
-
 import { createSlice } from '@reduxjs/toolkit';
 
 // 1. 定義 initialState
