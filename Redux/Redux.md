@@ -114,7 +114,16 @@ export default store;
 ### customStatsSlice.js
 ```
 import { createSlice } from '@reduxjs/toolkit';
-
+// 假設這是你的 async thunk
+export const fetchMatchListStats = createAsyncThunk(
+  'customStats/fetchMatchListStats',
+  async (params, thunkAPI) => {
+    // 這裡放你的 API 請求邏輯
+    const response = await fetch('/api/match-list-stats');
+    if (!response.ok) throw new Error('Network response was not ok');
+    return await response.json();
+  }
+);
 const initialState = {
   matchListStats: [],
   status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
