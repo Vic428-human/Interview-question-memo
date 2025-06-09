@@ -33,8 +33,9 @@
 ### 使用 useSelector 擷取 Redux 狀態
 
 從 Redux 中擷取 customStats slice，並解構其中的 matchListStats
+```
 const { matchListStats } = useSelector(selectCustomStatsSlice);
-
+```
 
 ---
 ### 定義 Selector Function
