@@ -1,7 +1,7 @@
 
 ---
 
-📘 Redux + AsyncThunk 教學筆記：
+📘 Redux + AsyncThunk 筆記：
 
 教你如何從 Redux store 擷取資料、定義 Selector、
 建立 async thunk 並處理 API 回傳資料。
@@ -50,61 +50,8 @@ const { matchListStats } = useSelector(selectCustomStatsSlice);
 export const selectCustomStatsSlice = ({ customStatsReducer }) => customStatsReducer;
 
 ```
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchMatchStatsFromAPI } from '../../api/statsAPI';
+ 
 
-// 初始狀態
-const initialStatsState = {
-  matchListStats: [],
-  loading: false,
-  error: null,
-};
-
-// AsyncThunk Action
-export const loadMatchStatsAsync = createAsyncThunk(
-  'stats/loadMatchStats',
-  async (query, { rejectWithValue }) => {
-    try {
-      const { extraInfo } = query;
-      const { data, status } = await fetchMatchStatsFromAPI(query);
-      if (status === 200) {
-        return data.matches.concat([extraInfo]);
-      } else {
-        return rejectWithValue('Request failed');
-      }
-    } catch (err) {
-      return rejectWithValue(err.message);
-    }
-  }
-);
-
-// createSlice
-const customStatsSlice = createSlice({
-  name: 'customStats',
-  initialState: initialStatsState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(loadMatchStatsAsync.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(loadMatchStatsAsync.fulfilled, (state, action) => {
-        state.loading = false;
-        state.matchListStats = action.payload;
-      })
-      .addCase(loadMatchStatsAsync.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      });
-  },
-});
-```
-// Selector Function（你問的重點）
-export const selectCustomStatsSlice = ({ customStatsReducer }) => customStatsReducer;
-
-// 匯出 reducer 給 store 使用
-export default customStatsSlice.reducer;
 
 ---
 
