@@ -130,7 +130,22 @@ const customStatsSlice = createSlice({
       state.status = 'idle';
       state.error = null;
     },
-
+extraReducers: (builder) => {
+    builder
+      .addCase(fetchMatchListStats.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(fetchMatchListStats.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.matchListStats = action.payload;
+        state.error = null;
+      })
+      .addCase(fetchMatchListStats.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      });
+  },
   },
 });
 
