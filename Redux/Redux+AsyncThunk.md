@@ -50,7 +50,17 @@ const { matchListStats } = useSelector(selectCustomStatsSlice);
 export const selectCustomStatsSlice = ({ customStatsReducer }) => customStatsReducer;
 
 ```
- 
+這裡的 customStatsReducer 是你在 store.js 裡註冊進 Redux 的 reducer key 名稱，也就是這段：
+
+```
+import customStatsReducer from '../features/customStats/customStatsSlice';
+
+const store = configureStore({
+  reducer: {
+    customStatsReducer, // 👈 這個 key 的名字就是 select function 裡用的名字
+  },
+});
+```
 
 
 ---
