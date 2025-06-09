@@ -44,9 +44,9 @@ const { matchListStats } = useSelector(selectCustomStatsSlice);
 
 ---
 ### 定義 Selector Function
-
-// Selector：從 RootState 中取得 customStatsReducer
-
+```
+//src/features/customStats/customStatsSlice.js
+ 
 ```
 export const selectCustomStatsSlice = ({ customStatsReducer }) => customStatsReducer;
 
