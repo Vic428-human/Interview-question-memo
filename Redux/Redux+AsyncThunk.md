@@ -91,11 +91,12 @@ const store = configureStore({
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialStatsState = {
-  matchListStats: [],
-  loading: false,
-  error: null,
+  matchListStats: [], // 存放比賽資料的陣列
+  loading: false,     // 是否正在載入
+  error: null         // 若有錯誤，記錄錯誤訊息
 };
 
+//你要呼叫 API 去拿比賽統計資料，成功後把資料傳回給 reducer 使用，如果失敗，就拋出錯誤
 const customStatsSlice = createSlice({
   name: 'customStats',
   initialState: initialStatsState,
