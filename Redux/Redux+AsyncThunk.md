@@ -64,6 +64,43 @@ const store = configureStore({
   },
 });
 ```
-
-
 ---
+
+```
+// src/features/customStats/customStatsSlice.js
+
+import { createSlice } from '@reduxjs/toolkit';
+
+// 1. 定義 initialState
+const initialState = {
+  matchListStats: [],
+  status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
+  error: null,
+};
+
+// 2. 建立 slice
+const customStatsSlice = createSlice({
+  name: 'customStats',
+  initialState,
+  reducers: {
+    // 這裡可以定義同步的 reducer，例如 resetStats
+    resetStats(state) {
+      state.matchListStats = [];
+      state.status = 'idle';
+      state.error = null;
+    },
+  },
+  // 3. 如果有 asyncThunk，這裡可以加上 extraReducers
+  // extraReducers: (builder) => {...}
+});
+
+// 4. 導出 actions（可選）
+export const { resetStats } = customStatsSlice.actions;
+
+// 5. 導出 reducer，給 store 註冊用
+export default customStatsSlice.reducer;
+
+// 6. (可選) 定義 selector
+export const selectCustomStatsSlice = (state) => state.customStatsReducer;
+
+```
