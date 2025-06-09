@@ -34,6 +34,11 @@
 
 從 Redux 中擷取 customStats slice，並解構其中的 matchListStats
 ```
+
+import { useSelector } from 'react-redux';
+import { selectCustomStatsSlice } from '../features/customStats/customStatsSlice';
+
+
 const { matchListStats } = useSelector(selectCustomStatsSlice);
 ```
 
@@ -41,9 +46,11 @@ const { matchListStats } = useSelector(selectCustomStatsSlice);
 ### 定義 Selector Function
 
 // Selector：從 RootState 中取得 customStatsReducer
+
+```
 export const selectCustomStatsSlice = ({ customStatsReducer }) => customStatsReducer;
 
-
+```
 ```
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchMatchStatsFromAPI } from '../../api/statsAPI';
