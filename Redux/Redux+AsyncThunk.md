@@ -67,9 +67,8 @@ const store = configureStore({
 
 
 ---
-
-3. 建立 Redux Store
-
+### 建立 Redux Store
+```
 // 引入 customStatsReducer
 import customStatsReducer from './customStatsReducer';
 
@@ -79,8 +78,39 @@ const store = configureStore({
   },
 });
 
-
+```
 ---
+
+```
+🧩 customStatsReducer 的「原本樣子」
+
+它是 createSlice(...).reducer 的結果，通常是這樣：
+
+// src/features/customStats/customStatsSlice.js
+
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialStatsState = {
+  matchListStats: [],
+  loading: false,
+  error: null,
+};
+
+const customStatsSlice = createSlice({
+  name: 'customStats',
+  initialState: initialStatsState,
+  reducers: {
+    // 可選：定義一些同步的 reducers
+  },
+  extraReducers: (builder) => {
+    // 可選：處理 async thunk
+  },
+});
+
+// 這一行就是 export 出 reducer function
+export default customStatsSlice.reducer;
+```
+
 
 4. 定義 initialState
 
