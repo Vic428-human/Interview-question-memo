@@ -88,37 +88,55 @@ const store = configureStore({
 
 // src/features/customStats/customStatsSlice.js
 
-import { createSlice } from '@reduxjs/toolkit';
+// src/features/gameStats/gameStatsSlice.js
 
-const initialStatsState = {
-  matchListStats: [], // 存放比賽資料的陣列
-  loading: false,     // 是否正在載入
-  error: null         // 若有錯誤，記錄錯誤訊息
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { getGameStatsFromAPI } from '../../api/gameStatsAPI'; // 假設這是 API 檔案
+
+const initialState = {
+  matchList: [],
+  loading: false,
+  error: null,
 };
 
-//你要呼叫 API 去拿比賽統計資料，成功後把資料傳回給 reducer 使用，如果失敗，就拋出錯誤
-const customStatsSlice = createSlice({
-  name: 'customStats',
-  initialState: initialStatsState,
-  reducers: {
-    // 可選：定義一些同步的 reducers
-  },
+// ✅ 放這裡：定義 asyncThunk
+export const fetchGameStatsAsync = createAsyncThunk(
+  'gameStats/fetchGameStats',
+  async (params) => {
+    const { extraData } = params;
+    const { data, status } = await getGameStatsFromAPI(params);
+    if (status === 200) {
+      return data.matches.concat([extraData]);
+    }
+  }
+);
+
+// 然後 createSlice 放這裡
+const gameStatsSlice = createSlice({
+  name: 'gameStats',
+  initialState,
+  reducers: {},
   extraReducers: (builder) => {
-    // 可選：處理 async thunk
+    builder
+      .addCase(fetchGameStatsAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchGameStatsAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.matchList = action.payload;
+      })
+      .addCase(fetchGameStatsAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
   },
 });
 
-// 這一行就是 export 出 reducer function
-export default customStatsSlice.reducer;
-```
+// Selector function
+export const selectGameStats = ({ gameStatsReducer }) => gameStatsReducer;
 
-
-4. 定義 initialState
-
-const initialStatsState = {
-  matchListStats: [],
-  // 其他狀態項目...
-};
+// 匯出 reducer 給 store 使用
+export default gameStatsSlice.reducer;
 
 
 ---
