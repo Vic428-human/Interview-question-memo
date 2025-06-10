@@ -9,18 +9,23 @@
 
 ### 假設 useQuery 的回傳data如下
 ```
-// 假資料
-const data = {
-  todos: [
-    { id: 1, text: '買牛奶', completed: false },
-    { id: 2, text: '寫作業', completed: true },
-    { id: 3, text: '運動30分鐘', completed: false },
-  ],
-  refetchNeeded: true, // 這裡可以切換 true/false 來測試 refetchInterval
+// 模擬取得下注賠率的 API
+const fetchOdds = async () => {
+  // 這裡可替換為實際 API 呼叫
+  // 假設每次取得最新賠率
+  return {
+    odds: [
+      { id: 1, name: '隊伍A', value: Math.random() * 10 + 1 },
+      { id: 2, name: '隊伍B', value: Math.random() * 10 + 1 },
+      { id: 3, name: '和局', value: Math.random() * 5 + 1 },
+    ],
+    updatedAt: Date.now(),
+  };
 };
 ```
 
 ### refetchInterval 在術語上就叫做「polling」（輪詢）
+> 這裡以下注賠率做參考，賠率這種東西都是每秒刷新，所以不用特別在 refetchInterval 下判斷。
 
 ```
 import { useQuery } from '@tanstack/react-query';
@@ -34,20 +39,27 @@ const fetchTodos = async () => {
 
 function TodosComponent() {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['todos'],
-    queryFn: fetchTodos,
-    refetchInterval: (data) => (data?.refetchNeeded ? 5000 : false), // 從 useQuery 回傳的 data傳進來的
+    queryKey: ['odds'],
+    queryFn: fetchOdds,
+    refetchInterval: 1000, // 每秒自動 refetch 一次
+    refetchIntervalInBackground: true, // 即使視窗非焦點也持續 polling（可選）
   });
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <ul>
-      {data.todos.map((todo) => (
-        <li key={todo.id}>{todo.text}</li>
-      ))}
-    </ul>
+    <div>
+      <h3>最新下注賠率</h3>
+      <ul>
+        {data.odds.map((item) => (
+          <li key={item.id}>
+            {item.name}：{item.value.toFixed(2)}
+          </li>
+        ))}
+      </ul>
+      <small>更新時間：{new Date(data.updatedAt).toLocaleTimeString()}</small>
+    </div>
   );
 }
 ```
