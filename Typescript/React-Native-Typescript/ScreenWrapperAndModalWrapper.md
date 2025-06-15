@@ -1,5 +1,7 @@
 # 前言
 > 這邊涵蓋了 ScreenWrapper 跟 ModalWrapper 的 typescript 實作
+> 在公司層級的項目中，為了統一樣板，一般來說會把 Screen 跟 Modal 這類組件都標準化，
+> 避免不同人員實作的時候各自定義產生不兼容的問題。
 
 ## ScreenWrapper 用途說明 >> 頁面基礎容器
 
