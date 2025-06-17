@@ -35,8 +35,5 @@ function handleClockInOut(clockType) {
     userId: "123",
     location: "Taipei", // 可附加更多數據
   });
-
-  // 3. 其他副作用（例如顯示打卡成功）
-  window.showToast?.(`${clockType} 打卡成功！時間: ${currentTime}`);
 }
 ```
