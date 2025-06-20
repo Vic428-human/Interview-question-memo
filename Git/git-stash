@@ -1,0 +1,10 @@
+
+
+```jsx
+git stash list
+// stash@{0}: WIP on develop: c214abdc6 feat: xxx 修正 ms
+```
+
+```jsx
+git stash apply stash@{0}
+```
