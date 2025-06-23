@@ -13,18 +13,11 @@ contextProvider另一個好處是，能透過這一層去判斷，
 
 > 後台頁面要顯示「用戶列表（User List）」，從 API 拿到資料後，傳遞到需要的 table component。
 
-
-
-
----
-
-✅ 修改後的資料流程式碼（參數名稱調整後）：
-
-
 ---
 
 📍 最上層頁面：AdminDashboard.jsx
 
+```
 export default function AdminDashboard() {
   const { data: allUserList } = useQuery({
     queryKey: ['userList', 'apiFetchAllUsers', i18n.language],
@@ -36,12 +29,13 @@ export default function AdminDashboard() {
     <UserTableContainer userList={allUserList} viewMode="detailed" />
   );
 }
-
+```
 
 ---
 
 📍 中層容器組件：UserTableContainer.jsx
 
+```
 function UserTableContainer({ userList, viewMode }) {
   return (
     <>
@@ -50,12 +44,12 @@ function UserTableContainer({ userList, viewMode }) {
     </>
   );
 }
-
-
+```
 ---
 
 📍 使用 Context 傳遞資料：DetailedUserTable.jsx
 
+```
 import { UserContext } from './UserContext';
 
 const DetailedUserTable = ({ userList }) => {
@@ -67,22 +61,22 @@ const DetailedUserTable = ({ userList }) => {
   );
 };
 
-
+```
 ---
 
 📍 更底層組件：UserTable.jsx / UserStatsPanel.jsx
-
+```
 const { userList } = useContext(UserContext);
 
 // 使用 userList 渲染表格或統計資料
-
+```
 
 ---
 
 ✅ Context 建立檔案：UserContext.js
-
+```
 import { createContext } from 'react';
 export const UserContext = createContext({});
 
-
+```
 ---
