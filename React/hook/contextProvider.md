@@ -66,11 +66,74 @@ const DetailedUserTable = ({ userList }) => {
 
 📍 更底層組件：UserTable.jsx / UserStatsPanel.jsx
 ```
-const { userList } = useContext(UserContext);
+✅ 子組件模擬：UserTable
 
-// 使用 userList 渲染表格或統計資料
+// UserTable.jsx
+import React, { useContext } from 'react';
+import { UserContext } from './UserContext';
+
+const UserTable = () => {
+  const { userList } = useContext(UserContext);
+
+  return (
+    <div className="p-4">
+      <h2 className="text-lg font-bold mb-2">User Table</h2>
+      <table className="w-full border-collapse border border-gray-300">
+        <thead>
+          <tr className="bg-gray-100">
+            <th className="border p-2">ID</th>
+            <th className="border p-2">Name</th>
+            <th className="border p-2">Email</th>
+            <th className="border p-2">Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          {userList?.map((user) => (
+            <tr key={user.id}>
+              <td className="border p-2">{user.id}</td>
+              <td className="border p-2">{user.name}</td>
+              <td className="border p-2">{user.email}</td>
+              <td className="border p-2">{user.role}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default UserTable;
+
 ```
+```
+✅ 子組件模擬：UserStatsPanel
 
+// UserStatsPanel.jsx
+import React, { useContext } from 'react';
+import { UserContext } from './UserContext';
+
+const UserStatsPanel = () => {
+  const { userList } = useContext(UserContext);
+
+  const totalUsers = userList?.length ?? 0;
+  const adminCount = userList?.filter((user) => user.role === 'admin').length ?? 0;
+  const guestCount = userList?.filter((user) => user.role === 'guest').length ?? 0;
+
+  return (
+    <div className="p-4 mt-4 bg-blue-50 rounded">
+      <h2 className="text-lg font-bold mb-2">User Statistics</h2>
+      <ul className="list-disc ml-5">
+        <li>Total Users: {totalUsers}</li>
+        <li>Admins: {adminCount}</li>
+        <li>Guests: {guestCount}</li>
+      </ul>
+    </div>
+  );
+};
+
+export default UserStatsPanel;
+
+```
 ---
 
 ✅ Context 建立檔案：UserContext.js
