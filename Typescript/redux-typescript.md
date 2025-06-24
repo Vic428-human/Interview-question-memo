@@ -29,12 +29,14 @@ reducers 裡面可以有 js 或是 ts 不影響
 
 ```
 import { configureStore } from '@reduxjs/toolkit'
-import counterReducer from './features/counterSlice' 
+import counterReducer from './features/counterSlice'  (假設這個是還沒從 js 轉成 ts的slice)
+// 其他多個 reducers 
 
 // 建立 store
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,  // Add the counter reducer
+    counter: counterReducer,
+   // ....Add the counter reducer
   },
 })
 
@@ -80,7 +82,11 @@ export const counterSlice = createSlice({
 
 export const { increment, decrement, incrementByAmount } = counterSlice.actions
 
-// Other code such as selectors can use the imported `RootState` type
+// RootState 先前已經在 Store 裡面定義好類型
+// 當你在 configureStore 裡定義了多個 reducer（如 001、002、counter），RootState 會自動推導出整個 store 的結構，例如： `counter: CounterState,  // { value: number }`
+// 當你在 selector（如 selectCount）裡使用 state.counter.value 時，TypeScript 就能正確推導 state 的型別，並檢查你是否正確存取 state。
+// counter ==> slice 的 name
+// value ==> slice 的 state value 
 export const selectCount = (state: RootState) => state.counter.value
 
 export default counterSlice.reducer
