@@ -55,7 +55,7 @@ declare module '*.svg?react' {
 會解析 package.json 裡的 types 欄位
 適合用在 Node.js 或 CommonJS 專案中
 
-適合用在，Node.js、ts-node。
+- 適合用在，Node.js、ts-node。
 
 例如
 ```
@@ -70,9 +70,15 @@ node_modules/my-lib/package.json (types 欄位)
 
 `moduleResolution: "bundler"`
 
-Vite、Webpack、瀏覽器端
+- Vite、Webpack、瀏覽器端
 
+這是 TypeScript 5.0 引入的新模式，設計給 現代 bundler（如 Vite、Webpack、esbuild）使用：
 
+不會模仿 Node.js 的模組尋找邏輯
+假設 bundler 會處理所有的模組路徑與副檔名
+支援 extensionless imports（不帶副檔名）與 bare imports
+更貼近 ESM 模組語法，適合用在瀏覽器端或 Vite 專案
+🧠 重點是：TypeScript 不再試圖解析實際檔案位置，而是交給 bundler 處理，自己只負責型別提示與檢查。
 
 
 
