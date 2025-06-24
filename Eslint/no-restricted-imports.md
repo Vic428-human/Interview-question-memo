@@ -1,4 +1,6 @@
 
+配置檔案： ealint.config.js
+
 這個配置強制開發者使用型別安全的 hooks：
 - ❌ 不要使用：`useSelector`, `useDispatch` 
 - ✅ 應該使用：`useAppSelector`, `useAppDispatch`
