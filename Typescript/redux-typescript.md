@@ -1,4 +1,3 @@
-no
 前言
 > 假設當期專案是 js 基礎，要轉換成 typescript，其中一關就會需要對 redux 進行類型定義
 
@@ -110,3 +109,7 @@ export function Counter() {
   // omit rendering logic
 }
 ```
+
+- 轉成typescript的useAppSelector後,就不要在引用舊的 useSelector 跟 useDispatch
+
+https://github.com/Vic428-human/Interview-question-memo/blob/main/Eslint/no-restricted-imports.md
