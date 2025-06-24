@@ -1,4 +1,4 @@
-
+no
 前言
 > 假設當期專案是 js 基礎，要轉換成 typescript，其中一關就會需要對 redux 進行類型定義
 
@@ -91,4 +91,22 @@ export const selectCount = (state: RootState) => state.counter.value
 
 export default counterSlice.reducer
 
+```
+
+### 組件中實際調用 useAppSelector 跟 useAppDispatch
+
+```
+import React, { useState } from 'react'
+
+import { useAppSelector, useAppDispatch } from 'app/hooks'
+
+import { decrement, increment } from './counterSlice'
+
+export function Counter() {
+  // The `state` arg is correctly typed as `RootState` already
+  const count = useAppSelector(state => state.counter.value)
+  const dispatch = useAppDispatch()
+
+  // omit rendering logic
+}
 ```
