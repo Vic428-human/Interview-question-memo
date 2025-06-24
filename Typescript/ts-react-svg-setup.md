@@ -34,6 +34,7 @@ declare module '*.svg?react' {
 ```
 
 ### tsconfig.json 應該包含以下設定
+
 ```
 {
   "compilerOptions": {
@@ -44,6 +45,36 @@ declare module '*.svg?react' {
   }
 }
 ```
+#### moduleResolution 關於配置 Node 或是 bundler 的差異
+
+`moduleResolution: "node"`
+
+這是 TypeScript 傳統的模組解析方式，模仿 Node.js 的行為：
+會從當前檔案開始往上層資料夾尋找 node_modules
+支援 .ts, .tsx, .d.ts, .js, .jsx 等副檔名
+會解析 package.json 裡的 types 欄位
+適合用在 Node.js 或 CommonJS 專案中
+
+適合用在，Node.js、ts-node。
+
+例如
+```
+import { something } from 'my-lib';
+```
+
+會去找
+```
+node_modules/my-lib/index.ts
+node_modules/my-lib/package.json (types 欄位)
+```
+
+`moduleResolution: "bundler"`
+
+Vite、Webpack、瀏覽器端
+
+
+
+
 
 
 
