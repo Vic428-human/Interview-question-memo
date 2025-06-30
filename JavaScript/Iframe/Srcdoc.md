@@ -45,4 +45,38 @@ srcdoc 會優先顯示（大多數瀏覽器）。
 
 ---
 
+```
+import React from "react";
 
+const IframeExample = () => {
+  const htmlContent = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          body { font-family: sans-serif; background-color: #f9f9f9; padding: 1rem; }
+          h2 { color: #4a90e2; }
+        </style>
+      </head>
+      <body>
+        <h2>Hello from iframe!</h2>
+        <p>This HTML comes from the srcdoc attribute.</p>
+        <button onclick="alert('Hi from inside iframe')">Click me</button>
+      </body>
+    </html>
+  `;
+
+  return (
+    <div>
+      <h1>React Page</h1>
+      <iframe
+        title="Embedded HTML"
+        srcDoc={htmlContent}
+        style={{ width: "100%", height: "300px", border: "1px solid #ccc" }}
+      />
+    </div>
+  );
+};
+
+export default IframeExample;
+```
