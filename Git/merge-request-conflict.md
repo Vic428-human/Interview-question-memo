@@ -45,8 +45,24 @@ rebase 後要強制 push，因為歷史被改寫了。
 但遠端的 feature/001 還保留了舊的 commit，所以 push 的時候就衝突了。
 
 - --force-with-lease 比 --force 更安全一些，它會檢查遠端分支是否有人同時改過，以避免不小心覆蓋別人的工作
+- 有可能會遇到 N個 pull 以及 Y個push 紀錄，都優先push  
 ```
 git push origin HEAD:feature/001 --force-with-lease
-``` 
+```
+
+### 「我知道我改寫了歷史，請用我這份覆蓋掉遠端，但如果遠端分支已經被別人推上新 commit，那就先不要推，讓我知道。」
+
+```
+原本 develop 上的提交：
+A — B — C
+
+你的 feature branch 原本：
+A — B — C
+            \
+             D — E
+
+你執行 rebase develop 後：
+A — B — C — D' — E'
+```
 
 ## 理論上到這個階段應該能正常推上去，然後之後再 gitlab merge request 確認沒問題就能合併了。
