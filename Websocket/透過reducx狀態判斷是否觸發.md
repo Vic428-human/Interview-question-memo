@@ -149,3 +149,15 @@ const AlertWebSocketComponent = () => {
 
 export default AlertWebSocketComponent;
 ```
+
+---
+
+🔍 詳細說明：
+
+變數名	說明
+
+lastMessage	是一個 MessageEvent 物件，代表從 WebSocket 收到的最新訊息
+lastMessage.data	是訊息的實際內容，通常是字串（可能是 JSON）
+lastMessage 的初始值	是 null，當尚未接收到任何訊息時
+
+---
