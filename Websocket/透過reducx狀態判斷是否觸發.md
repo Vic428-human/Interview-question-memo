@@ -1,7 +1,9 @@
 
 功能：
 - 1.isAlertEnabled, accessToken存在才觸發 websocket
-- 2.
+- 2.可以看到連線的各種狀態
+- 3.可以主動控制關閉連線
+- 4.可以即時看到最新的警報訊息
 
 ```
 import React, { useState, useEffect } from 'react';
