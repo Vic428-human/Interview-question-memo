@@ -1,4 +1,4 @@
-✅ 什麼時候會用？
+✅ 什麼時候會用？createRequire
 
 1. 你用的是 .mjs 檔案 或是 package.json 裡有 "type": "module"。
 
