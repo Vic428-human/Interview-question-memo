@@ -24,7 +24,7 @@ const odds_display_name = `${replaceAll(last_odds_label + '', '(<temp>)', '')}${
 ---
 
 假設函式實作如下：
-
+```
 function replaceAll(str, search, replacement) {
   return str.split(search).join(replacement);
 }
@@ -37,8 +37,7 @@ function formatOddsLabel(label) {
   }
   return '';
 }
-
-
+```
 ---
 
 🔍 輸出示範：
