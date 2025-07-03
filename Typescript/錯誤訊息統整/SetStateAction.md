@@ -11,10 +11,10 @@ Argument of type '{ propertiesA: string }[]' is not assignable to parameter of t
 const somethingOld = somethingOld ? somethingOld : [];
 
 // 父層傳 props 下來
-<SettingStakeCard somethingOld={somethingOld}  />
+<ExampleComp somethingOld={somethingOld}  />
 
 // props 下來後 rename 成 somethingNew
-const SettingStakeCard = ({ somethingOld: somethingNew }: Tprops) => {
+const ExampleComp = ({ somethingOld: somethingNew }: Tprops) => {
 
 const [state, setState] = useState([]);
 
