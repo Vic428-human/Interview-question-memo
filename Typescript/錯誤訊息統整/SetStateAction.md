@@ -19,6 +19,7 @@ const SettingStakeCard = ({ somethingOld: somethingNew }: Tprops) => {
 const [state, setState] = useState([]);
 
 // somethingNew 提供給 useState hook 開始出錯，但只要對 `useState([])` 定義初始值類型就能解決
+// 像是定義成 useState<T[]>([]); ， 至於 T[] 應該是什麼？ 就根據原先父層的 somethingNew 父層一開始定義了類型去沿用即可。
 useEffect(() => {
   if (somethingNew.length === 0) return;
   setState(somethingNew);
