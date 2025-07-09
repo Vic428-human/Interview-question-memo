@@ -1,10 +1,10 @@
 ✅ 完整實作：記錄上一個路徑（不使用 context、不觸發 re-render）
 
-
 ---
 
 1️⃣ usePreviousPath.ts — Hook：記錄上一頁路徑
 
+```
 // hooks/usePreviousPath.ts
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -24,12 +24,12 @@ export function usePreviousPath() {
 
   return prevPathRef;
 }
-
+```
 
 ---
 
 2️⃣ App.tsx — 在最上層引入 usePreviousPath 開始追蹤
-
+```
 // App.tsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
@@ -52,11 +52,11 @@ function App() {
 
 export default App;
 
-
+```
 ---
 
 3️⃣ MyPage.tsx — 使用 prevPathRef 來「返回上一頁」
-
+```
 // pages/MyPage.tsx
 import { useNavigate } from 'react-router-dom';
 import { usePreviousPath } from '../hooks/usePreviousPath';
@@ -84,7 +84,7 @@ function MyPage() {
 
 export default MyPage;
 
-
+```
 ---
 
 ✅ 示意流程：
