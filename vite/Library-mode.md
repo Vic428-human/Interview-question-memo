@@ -16,7 +16,10 @@ import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 ```
 
-
+#### 3. import.meta.url
+```
+const __dirname = dirname(fileURLToPath(import.meta.url));
+```
 
 ### 註
 - SPA
