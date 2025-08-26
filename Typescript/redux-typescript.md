@@ -121,3 +121,13 @@ useDispatch 就是 React-Redux 提供的一個 Hook，可以拿到 dispatch 這�
 Redux store 就像是學校的「公告欄」，上面寫著大家共用的資訊（state）。
 dispatch 就像是你把一張「請求單」交給教務處，請他更新公告欄上的資訊。
 action 就是那張「請求單」，上面寫著你要做什麼事情（例如「新增一個學生」、「刪除一個課程」）。
+
+### 2.AppDispatch 是什麼？
+我定義一個新的型別叫 AppDispatch，它等於我 AppStore 裡面的 dispatch 函式型別。
+這樣做的好處是：未來我們在程式中使用 dispatch，就能有 型別提示，TypeScript 會幫我們檢查 action 有沒有寫對。
+
+### 3.useAppDispatch 是什麼？
+Redux 官方的 useDispatch 回傳的是一個「沒特別指定型別」的 dispatch。
+如果直接用它，TypeScript 不知道你到底可以 dispatch 什麼樣的 action。
+
+
