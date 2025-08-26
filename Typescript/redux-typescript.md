@@ -113,3 +113,10 @@ export function Counter() {
 - 轉成typescript的useAppSelector後,就不要在引用舊的 useSelector 跟 useDispatch
 
 https://github.com/Vic428-human/Interview-question-memo/blob/main/Eslint/no-restricted-imports.md
+
+### 1. useDispatch 是什麼？
+在 Redux 中，我們要改變資料（state）時，需要發送「指令」（叫做 action）。
+useDispatch 就是 React-Redux 提供的一個 Hook，可以拿到 dispatch 這個函式，用來發送 action。
+Redux store 就像是學校的「公告欄」，上面寫著大家共用的資訊（state）。
+dispatch 就像是你把一張「請求單」交給教務處，請他更新公告欄上的資訊。
+action 就是那張「請求單」，上面寫著你要做什麼事情（例如「新增一個學生」、「刪除一個課程」）。
