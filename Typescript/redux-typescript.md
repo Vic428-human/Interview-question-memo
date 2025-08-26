@@ -131,9 +131,9 @@ Redux 官方的 useDispatch 回傳的是一個「沒特別指定型別」的 dis
 如果直接用它，TypeScript 不知道你到底可以 dispatch 什麼樣的 action。
 
 ### 4. 總結
-useDispatch：拿到 dispatch，發送 action。
-AppDispatch：定義 dispatch 的型別，避免寫錯 action。
-useAppDispatch：自己包裝過的 useDispatch，專門幫 TypeScript 初學者「加上安全帽」。
+- useDispatch：拿到 dispatch，發送 action。
+- AppDispatch：定義 dispatch 的型別，避免寫錯 action。
+- useAppDispatch：自己包裝過的 useDispatch，專門幫 TypeScript 初學者「加上安全帽」。
 
 ### Redux 的資料流小圖
 ```
