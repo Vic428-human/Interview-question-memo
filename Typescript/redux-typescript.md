@@ -46,7 +46,7 @@ export type AppDispatch = typeof store.dispatch // export type AppDispatch = App
 
 ```
 
-### counterSlice 內部定義
+### counterSlice 內部定義 (shane 這邊先不用看 )
 
 ```
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
