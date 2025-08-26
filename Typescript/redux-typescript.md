@@ -141,17 +141,17 @@ Redux 官方的 useDispatch 回傳的是一個「沒特別指定型別」的 dis
         │
         │  (1) 呼叫 useAppDispatch() 
         ▼
-   [ dispatch 函式 ]   ← 你要的「教務處窗口」
+   [ dispatch 函式 ]   
         │
         │  (2) 發送一張 action 請求單
         ▼
-   [ Reducer 處理器 ]   ← 判斷要怎麼改公告欄
+   [ Reducer 處理器 ]  
         │
-        │  (3) 根據 action 更新 state
+        │  (3) 教務處收到請求單，根據請求單的要求，判斷如何更新佈告欄的資訊
         ▼
    [ Store 公告欄 (state) ]
         │
-        │  (4) 通知所有用到 state 的組件
+        │  (4) 通知所有用到 公告欄 資訊的組件，因為可能不只一處 公告欄 資訊需要更新
         ▼
 [ Component 自動重新渲染 ]
 ```
