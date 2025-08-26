@@ -136,6 +136,7 @@ AppDispatch：定義 dispatch 的型別，避免寫錯 action。
 useAppDispatch：自己包裝過的 useDispatch，專門幫 TypeScript 初學者「加上安全帽」。
 
 ### Redux 的資料流小圖
+```
 [ Component 組件 ]
         │
         │  (1) 呼叫 useAppDispatch() 
@@ -153,4 +154,4 @@ useAppDispatch：自己包裝過的 useDispatch，專門幫 TypeScript 初學者
         │  (4) 通知所有用到 state 的組件
         ▼
 [ Component 自動重新渲染 ]
-
+```
