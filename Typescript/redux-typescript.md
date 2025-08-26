@@ -134,3 +134,23 @@ Redux 官方的 useDispatch 回傳的是一個「沒特別指定型別」的 dis
 useDispatch：拿到 dispatch，發送 action。
 AppDispatch：定義 dispatch 的型別，避免寫錯 action。
 useAppDispatch：自己包裝過的 useDispatch，專門幫 TypeScript 初學者「加上安全帽」。
+
+### Redux 的資料流小圖
+[ Component 組件 ]
+        │
+        │  (1) 呼叫 useAppDispatch() 
+        ▼
+   [ dispatch 函式 ]   ← 你要的「教務處窗口」
+        │
+        │  (2) 發送一張 action 請求單
+        ▼
+   [ Reducer 處理器 ]   ← 判斷要怎麼改公告欄
+        │
+        │  (3) 根據 action 更新 state
+        ▼
+   [ Store 公告欄 (state) ]
+        │
+        │  (4) 通知所有用到 state 的組件
+        ▼
+[ Component 自動重新渲染 ]
+
