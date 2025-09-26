@@ -20,11 +20,11 @@ Skill={} --這個不要動他
 
 Skill[#Skill+1]={} --新增一組技能
 Skill[#Skill].id=0 --技能ID(0=普攻)
-Skill[#Skill].lv=1 --技能等級A
+Skill[#Skill].lv=1 --技能等級A，如果是設定普攻，這裡lv寫多少都沒差
 Skill[#Skill].target=0 --技能對象(0=魔物；1=玩家；2=生命體或傭兵)
 Skill[#Skill].when=1 --技能使用時機(0=不限制；1=有怪物時；2=沒怪物時)
 Skill[#Skill].times=1 --技能連續使用次數
-Skill[#Skill].delay=0 --連續使用後的延遲
+Skill[#Skill].delay=0 --連續使用後的延遲，如果是設定普攻，這裡不要設定0，改成設定100，若設定0會導致無法順利施放技能。
 Skill[#Skill].sp={0,100} --SP百分比限制
 Skill[#Skill].nMyEnemy=0 --生命體(傭兵)被幾隻怪物以上攻擊才使用
 Skill[#Skill].nOwnerEnemy=0 --主人被幾隻怪物以上攻擊才使用
