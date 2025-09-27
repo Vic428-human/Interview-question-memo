@@ -1,10 +1,15 @@
-FollowDis=2 --跟隨距離
-MoveDelay=500 --兩次發送移動的延遲 500 ms，建議不要動他。
-RadiusAggr=12 --搜尋怪物的半徑
+查詢技能ID
+https://ro-rnai.github.io/plainTextEditor/
+
+FollowDis=2
+MoveDelay=500
+RadiusAggr=12
+
 
 -- 前面的{64,128,0,256,0,0,-1,-1}是預設模式(被動)
 -- 後面的{50,200,-800,25,30,-45,-1,1}是切換後的模式(主動)
-SearchMode={{64,128,0,256,0,0,-1,-1},{50,200,-800,25,30,-45,-1,1}} 
+SearchMode={{64,128,0,256,0,0,-1,-1},{200,50,0,25,30,0,-1,1}}
+
 -- {50,200,-800,25,30,-45,-1,1}共有8個數字用逗號分開，依序為
 -- {主人被打,生命體被打,其他玩家被打,主人攻擊,生命體攻擊,其他玩家攻擊,範圍外,範圍內}
 -- 假設今天怪物A在範圍內(搜尋半徑內)會得到1點的分數
@@ -12,23 +17,53 @@ SearchMode={{64,128,0,256,0,0,-1,-1},{50,200,-800,25,30,-45,-1,1}}
 -- 另外同時間怪物B也在範圍內，且正在攻擊主人，這時怪物B的分數是51分(1+50)
 -- 所以生命體會以怪物A為對象去攻擊(分數最高)
 -- ※如果最後分數是負的就不攻擊
-
 SearchSetting=SearchMode[2] --剛招喚生命體(傭兵)時載入被動模式；如果想要先載入主動模式可以將 1 改成 2
-WeakTargets={} --這是不使用技能的魔物ID清單，魔物ID可以查詢RO幻想廳等網站(這個設定只對生命體有效)
+WeakTargets={}  --這是不使用技能的魔物ID清單，魔物ID可以查詢RO幻想廳等網站(這個設定只對生命體有效)
 
-Skill={} --這個不要動他
+Skill={}
 
 Skill[#Skill+1]={} --新增一組技能
-Skill[#Skill].id=0 --技能ID(0=普攻)
-Skill[#Skill].lv=1 --技能等級A，如果是設定普攻，這裡lv寫多少都沒差
-Skill[#Skill].target=0 --技能對象(0=魔物；1=玩家；2=生命體或傭兵)
-Skill[#Skill].when=1 --技能使用時機(0=不限制；1=有怪物時；2=沒怪物時)
-Skill[#Skill].times=1 --技能連續使用次數
-Skill[#Skill].delay=0 --連續使用後的延遲，如果是設定普攻，這裡不要設定0，改成設定100，若設定0會導致無法順利施放技能。
-Skill[#Skill].sp={0,100} --SP百分比限制
-Skill[#Skill].nMyEnemy=0 --生命體(傭兵)被幾隻怪物以上攻擊才使用
-Skill[#Skill].nOwnerEnemy=0 --主人被幾隻怪物以上攻擊才使用
-Skill[#Skill].nRangeEnemy=0 --主動範圍內出現幾隻怪物以上攻擊才使用
-Skill[#Skill].chase=1 --距離魔物太超出技能範圍時是否靠近魔物
-Skill[#Skill].stemp=0 --不動他
-Skill[#Skill].count=0 --不動他
+Skill[#Skill].id=0  -- id=0, 是普通攻擊
+Skill[#Skill].lv=1
+Skill[#Skill].target=0
+Skill[#Skill].when=1
+Skill[#Skill].times=1
+Skill[#Skill].delay=0 -- 普通攻擊沒有延遲問題
+Skill[#Skill].sp={0,100}
+Skill[#Skill].nMyEnemy=0
+Skill[#Skill].nOwnerEnemy=0
+Skill[#Skill].nRangeEnemy=0
+Skill[#Skill].chase=1
+Skill[#Skill].stemp=0
+Skill[#Skill].count=0
+
+Skill[#Skill+1]={}
+Skill[#Skill].id=8014 --施展 混亂的祈福 可以幫自己補血
+Skill[#Skill].lv=5
+Skill[#Skill].target=0
+Skill[#Skill].when=1
+Skill[#Skill].times=1
+Skill[#Skill].delay=5000 -- 這邊不能設定0，會導致技能放不出來
+Skill[#Skill].sp={0,100}
+Skill[#Skill].nMyEnemy=0
+Skill[#Skill].nOwnerEnemy=0
+Skill[#Skill].nRangeEnemy=0
+Skill[#Skill].chase=1
+Skill[#Skill].stemp=0
+Skill[#Skill].count=0
+
+Skill[#Skill+1]={}
+Skill[#Skill].id=8013 -- 施展 善變，可以隨機施放法師一轉技能
+Skill[#Skill].lv=5
+Skill[#Skill].target=0
+Skill[#Skill].when=1
+Skill[#Skill].times=1
+Skill[#Skill].delay=1000 -- 這邊不能設定0，會導致技能放不出來
+Skill[#Skill].sp={20,100}
+Skill[#Skill].nMyEnemy=0
+Skill[#Skill].nOwnerEnemy=0
+Skill[#Skill].nRangeEnemy=0
+Skill[#Skill].chase=1
+Skill[#Skill].stemp=0
+Skill[#Skill].count=0 
+
