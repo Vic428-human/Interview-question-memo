@@ -1,3 +1,6 @@
+查詢技能ID
+https://ro-rnai.github.io/plainTextEditor/
+
 FollowDis=2
 MoveDelay=500
 RadiusAggr=12
@@ -19,22 +22,6 @@ WeakTargets={}  --這是不使用技能的魔物ID清單，魔物ID可以查詢R
 
 Skill={}
 
-Skill[#Skill+1]={}
-Skill[#Skill].id=8009 --月光
-Skill[#Skill].lv=5
-Skill[#Skill].target=0
-Skill[#Skill].when=1
-Skill[#Skill].times=1
-Skill[#Skill].delay=2700
-Skill[#Skill].sp={20,100}
-Skill[#Skill].nMyEnemy=0
-Skill[#Skill].nOwnerEnemy=0
-Skill[#Skill].nRangeEnemy=0
-Skill[#Skill].chase=1
-Skill[#Skill].stemp=0
-Skill[#Skill].count=0
-
-
 Skill[#Skill+1]={} --新增一組技能
 Skill[#Skill].id=0  -- id=0, 是普通攻擊
 Skill[#Skill].lv=1
@@ -50,3 +37,32 @@ Skill[#Skill].chase=1
 Skill[#Skill].stemp=0
 Skill[#Skill].count=0
 
+Skill[#Skill+1]={}
+Skill[#Skill].id=8014 --施展 混亂的祈福 可以幫自己補血
+Skill[#Skill].lv=5
+Skill[#Skill].target=0
+Skill[#Skill].when=1
+Skill[#Skill].times=1
+Skill[#Skill].delay=5000 -- 這邊不能設定0，會導致技能放不出來
+Skill[#Skill].sp={0,100}
+Skill[#Skill].nMyEnemy=0
+Skill[#Skill].nOwnerEnemy=0
+Skill[#Skill].nRangeEnemy=0
+Skill[#Skill].chase=1
+Skill[#Skill].stemp=0
+Skill[#Skill].count=0
+
+Skill[#Skill+1]={}
+Skill[#Skill].id=8013 -- 施展 善變，可以隨機施放法師一轉技能
+Skill[#Skill].lv=5
+Skill[#Skill].target=0
+Skill[#Skill].when=1
+Skill[#Skill].times=1
+Skill[#Skill].delay=1000 -- 這邊不能設定0，會導致技能放不出來
+Skill[#Skill].sp={20,100}
+Skill[#Skill].nMyEnemy=0
+Skill[#Skill].nOwnerEnemy=0
+Skill[#Skill].nRangeEnemy=0
+Skill[#Skill].chase=1
+Skill[#Skill].stemp=0
+Skill[#Skill].count=0 
