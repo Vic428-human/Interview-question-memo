@@ -1,4 +1,6 @@
 
+「即時資料需要 tab 切換自動更新：伺服器狀態、賽事比分、儀表板，避免顯示過期資料」
+
 ```
 focusManager.setEventListener((handleFocus) => {
   if (typeof window !== 'undefined' && window.addEventListener) {
