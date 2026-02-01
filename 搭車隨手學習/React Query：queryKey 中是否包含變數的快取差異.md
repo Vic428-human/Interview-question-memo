@@ -1,6 +1,6 @@
-完整範例程式碼
 
-`jsx
+
+```
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 
@@ -66,7 +66,7 @@ function App() {
 }
 
 export default App;
-`
+```
 
 ---
 
