@@ -39,3 +39,23 @@ const CreateTodo = () => {
   return <form onSubmit={onSubmit}>...</form>;
 };
 ```
+
+🚫 不正確做法示例（React 16 及之前）
+錯誤一：直接將 mutate 作為事件處理器
+```
+const CreateTodo = () => {
+  const mutation = useMutation({
+    mutationFn: (event) => { // ❌ 參數預期是 event 物件
+      // 問題：當 React Query 稍後執行此函數時，event 已被重置為 null
+      event.preventDefault(); // 🕳️ 這裡會出錯：event 是 null 或已被清空
+      return fetch("/api", new FormData(event.target));
+    },
+  });
+
+  // ❌ 錯誤：直接將非同步的 mutate 函數傳給 onSubmit
+  // 在 React 16 中，事件物件會在回調執行後被立即清空重用
+  return <form onSubmit={mutation.mutate}> 
+    <button type="submit">提交</button>
+  </form>;
+};
+```
