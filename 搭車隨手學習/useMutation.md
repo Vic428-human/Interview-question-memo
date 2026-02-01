@@ -13,15 +13,55 @@ const mutation = useMutation({
 ```
 // ✅ 早期正确做法：将mutate包装在同步函数中
 ```
-const onSubmit = (event) => {
+const CreateTodo = () => {
+  const [title, setTitle] = useState('');
+  const mutation = useMutation({
+    mutationFn: (formData) => {
+      // 注意：這裡接收的是已經提取好的 formData，不是 event
+      return fetch("/api/todos", {
+        method: 'POST',
+        body: formData,
+      });
+    },
+    onSuccess: () => {
+      alert('Todo created successfully!');
+      setTitle(''); // 清空表單
+    },
+    onError: (error) => {
+      alert(`Error: ${error.message}`);
+    },
+  });
+  
+  const onSubmit = (event) => {
     event.preventDefault();
-    // ✅ 關鍵一步：在同步階段立即提取數據
+    // ✅ 在同步階段立即提取數據
     const formData = new FormData(event.target);
     
-    // ✅ 傳遞的是純數據（formData），而不是會“過期”的 event 物件
+    // ✅ 傳遞純數據，不是 event 物件
     mutation.mutate(formData);
-}；
-  return <form onSubmit={onSubmit}>...</form>;
+  };
+
+  return (
+    <form onSubmit={onSubmit}>
+      <input
+        type="text"
+        name="title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Enter todo title"
+        required
+      />
+      <button type="submit" disabled={mutation.isLoading}>
+        {mutation.isLoading ? 'Creating...' : 'Create Todo'}
+      </button>
+      
+      {mutation.isError && (
+        <div style={{ color: 'red' }}>
+          Error: {mutation.error.message}
+        </div>
+      )}
+    </form>
+  );
 };
 ```
 
